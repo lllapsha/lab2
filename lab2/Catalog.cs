@@ -10,31 +10,53 @@ namespace lab2
     {
         private readonly List<Track> tracks = new List<Track>();
 
-        public IEnumerable<object> AllTrack { get; set; }
+        public IEnumerable<Track> AllTrack { get; set; }
 
         public void AddTrack(Track track)
         {
-            if (tracks.Contains(track)) // если уже есть такой трек
+            if (tracks.Contains(track)) 
             {
                 throw new ArgumentException("Такой трек уже есть в каталоге");
             }
             tracks.Add(track);
+
         }
         public void RemoveTrack(Track track)
         {
-            if (tracks.Contains(track) == false)
+            Track existingTrack = tracks.FirstOrDefault(t => t.Title == track.Title && t.Author == track.Author);
+
+            if (existingTrack != null)
+            {
+                tracks.Remove(existingTrack);
+            }
+            else
             {
                 throw new ArgumentException("Такого трека нет в каталоге");
             }
-            tracks.Remove(track);
 
         }
+
+        public void SearchTrack(Track track)
+        {
+            Track existingTrack = tracks.FirstOrDefault(t => t.Title == track.Title && t.Author == track.Author);
+
+            if (existingTrack != null)
+            {
+                track = existingTrack;
+            }
+            else
+            {
+                throw new ArgumentException("Такого трека нет в каталоге");
+            }
+        }
+        
         public IEnumerable<Track> AllTracks
         {
             get
             {
-                return tracks; //сделать вывод списка
+                return tracks;
             }
         }
+
     }
 }

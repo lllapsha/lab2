@@ -12,20 +12,24 @@ namespace lab2
         {
             var catalog = new Catalog();
 
+            bool isTrue = true;
+
             do
             {
                 Console.WriteLine("1. Показать все треки");
                 Console.WriteLine("2. Добавить трек");
                 Console.WriteLine("3. Удалить трек");
                 Console.WriteLine("4. Поиск трека");
+                Console.WriteLine("q. Выйти");
 
+                Console.WriteLine();
+                var key = Console.ReadKey().KeyChar;
 
-                var key = Console.ReadKey();
-
-                switch (key.KeyChar)
+                switch (key)
                 {
                     case '1':
                         {
+                            Console.WriteLine();
                             foreach (Track tr in catalog.AllTracks)
                             {
                                 PrintTrack(tr);
@@ -34,24 +38,36 @@ namespace lab2
                         }
                     case '2':
                         {
+                            Console.WriteLine();
                             var track = ReadTrack();
                             catalog.AddTrack(track);
                             break;
                         }
                     case '3':
                         {
+                            Console.WriteLine();
                             var track = ReadTrack();
                             catalog.RemoveTrack(track);
                             break;
                         }
                     case '4':
                         {
+                            Console.WriteLine();
                             var track = ReadTrack();
+                            catalog.SearchTrack(track);
+                            PrintTrack(track);
+                            break;
+                        }
+                    case 'q':
+                        {
+                            isTrue = false;
                             break;
                         }
                 }
+                Console.WriteLine();
             }
-            while (Console.ReadKey().KeyChar != 'q');
+            while (isTrue);
+
         }
         public static void PrintTrack(Track track)
         {
