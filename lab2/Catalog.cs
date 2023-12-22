@@ -49,14 +49,16 @@ namespace lab2
                 throw new ArgumentException("Такого трека нет в каталоге");
             }
         }
-        
-        public IEnumerable<Track> AllTracks
+
+
+        public ICollection<Track> AllTracks
         {
             get
             {
                 return tracks;
             }
         }
+
 
     }
 }
